@@ -28,40 +28,9 @@ body {
   background: var(--cream);
   color: var(--text);
   overflow-x: hidden;
-  cursor: none;
   line-height: 1.7;
 }
 
-/* ── Custom Cursor ─────────────────────────────────── */
-#cursor-dot {
-  position: fixed;
-  width: 8px; height: 8px;
-  background: var(--deep-rose);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.2s;
-  mix-blend-mode: multiply;
-  opacity: 0;
-}
-
-#cursor-ring {
-  position: fixed;
-  width: 32px; height: 32px;
-  border: 1.5px solid var(--deep-rose);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: border-color 0.2s, opacity 0.2s;
-  opacity: 0;
-}
-
-body:has(a:hover) #cursor-dot,
-body:has(button:hover) #cursor-dot { width: 14px; height: 14px; background: var(--deep-peach); }
-body:has(a:hover) #cursor-ring,
-body:has(button:hover) #cursor-ring { width: 44px; height: 44px; border-color: var(--deep-peach); }
 
 /* ── Animated Gradient Background ─────────────────── */
 #gradient-bg {
@@ -329,7 +298,7 @@ section {
   letter-spacing: 0.04em;
   text-decoration: none;
   transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
-  cursor: none;
+
 }
 
 .btn-primary {
@@ -565,7 +534,7 @@ section {
   color: var(--text);
   text-decoration: none;
   border-radius: 0 50px 50px 0;
-  cursor: none;
+
   transition:
     transform 0.3s var(--ease-spring),
     box-shadow 0.3s,
@@ -647,7 +616,7 @@ section {
   transition:
     transform 0.4s var(--ease-spring),
     box-shadow 0.4s;
-  cursor: none;
+
 }
 
 .project-card:hover {
@@ -805,7 +774,7 @@ section {
   padding: 1.5rem;
   box-shadow: 0 3px 16px rgba(74,55,40,0.06);
   transition: transform 0.35s var(--ease-spring), box-shadow 0.35s;
-  cursor: none;
+
 }
 
 .currently-card:hover {
