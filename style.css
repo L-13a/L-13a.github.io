@@ -655,6 +655,23 @@ section {
 .cover-sage     { background: linear-gradient(135deg, #D4EDD0, #B8D4B0, #8AB89A); }
 .cover-rose     { background: linear-gradient(135deg, #F5D5D8, #E8B4B8, #C9909A); }
 
+.cover-iframe {
+  overflow: hidden;
+  background: #f5ede8;
+}
+
+.iframe-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 600px;
+  transform: scale(0.3);
+  transform-origin: top left;
+  pointer-events: none;
+  border: none;
+}
+
 .project-body {
   padding: 1.5rem;
 }
