@@ -657,6 +657,8 @@ section {
 .cover-rose     { background: linear-gradient(135deg, #F5D5D8, #E8B4B8, #C9909A); }
 
 .cover-iframe {
+  height: auto;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   background: #f5ede8;
 }
@@ -667,7 +669,7 @@ section {
   left: 0;
   width: 1200px;
   height: 600px;
-  transform: scale(0.3);
+  transform: scale(0.4);
   transform-origin: top left;
   pointer-events: none;
   border: none;
