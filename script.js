@@ -160,6 +160,7 @@ class Ink {
 
 let inks = [];
 let wPrevX = -1, wPrevY = -1, wLastDrop = 0;
+let currentRgb = [...WATER_PALETTE[0]];  // smoothed current color
 
 function resizeWaterCanvas() {
   waterCanvas.width  = window.innerWidth;
@@ -167,7 +168,6 @@ function resizeWaterCanvas() {
 }
 
 function animateWater() {
-  // Clear each frame — no destination-out rings
   wCtx.clearRect(0, 0, waterCanvas.width, waterCanvas.height);
   inks = inks.filter(ink => { ink.draw(); return ink.update(); });
   requestAnimationFrame(animateWater);
@@ -185,19 +185,39 @@ document.addEventListener('mousemove', e => {
   const speed = Math.sqrt(dx * dx + dy * dy);
 
   if (speed > 2) {
-    const angle = Math.atan2(dy, dx);                         // -π … π
-    const normAngle = (angle + Math.PI) / (Math.PI * 2);     //  0 … 1
-    const cIdx  = Math.floor(normAngle * WATER_PALETTE.length) % WATER_PALETTE.length;
+    const angle = Math.atan2(dy, dx);
+    const normAngle = (angle + Math.PI) / (Math.PI * 2);       // 0…1
+    const fIdx  = normAngle * WATER_PALETTE.length;             // float index
+    const cIdx  = Math.floor(fIdx) % WATER_PALETTE.length;
     const cIdx2 = (cIdx + 1) % WATER_PALETTE.length;
+    const blend = fIdx - Math.floor(fIdx);                      // 0…1 fraction
+
+    // Target: interpolate between the two adjacent palette colors
+    const c1 = WATER_PALETTE[cIdx];
+    const c2 = WATER_PALETTE[cIdx2];
+    const targetRgb = [
+      c1[0] + (c2[0] - c1[0]) * blend,
+      c1[1] + (c2[1] - c1[1]) * blend,
+      c1[2] + (c2[2] - c1[2]) * blend,
+    ];
+
+    // Lerp current color toward target — controls how fast hue shifts
+    const lerpFactor = 0.08;
+    currentRgb[0] += (targetRgb[0] - currentRgb[0]) * lerpFactor;
+    currentRgb[1] += (targetRgb[1] - currentRgb[1]) * lerpFactor;
+    currentRgb[2] += (targetRgb[2] - currentRgb[2]) * lerpFactor;
 
     const count = Math.min(3, 1 + Math.floor(speed / 15));
     for (let i = 0; i < count; i++) {
       const t = count > 1 ? i / (count - 1) : 0;
-      inks.push(new Ink(
-        ox + dx * t,
-        oy + dy * t,
-        Math.random() < 0.65 ? WATER_PALETTE[cIdx] : WATER_PALETTE[cIdx2]
-      ));
+      // Slight per-blob variation for organic feel
+      const v = 12;
+      const blobRgb = [
+        Math.round(currentRgb[0] + (Math.random() - 0.5) * v),
+        Math.round(currentRgb[1] + (Math.random() - 0.5) * v),
+        Math.round(currentRgb[2] + (Math.random() - 0.5) * v),
+      ];
+      inks.push(new Ink(ox + dx * t, oy + dy * t, blobRgb));
     }
     if (inks.length > 400) inks.splice(0, inks.length - 400);
   }
