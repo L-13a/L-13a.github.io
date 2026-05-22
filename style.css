@@ -494,87 +494,45 @@ section {
 }
 
 .skills-cluster {
-  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: baseline;
+  gap: 0 2.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid rgba(74,55,40,0.07);
+}
+
+.skills-cluster:first-of-type {
+  border-top: 1px solid rgba(74,55,40,0.07);
 }
 
 .cluster-title {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.cluster-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, rgba(74,55,40,0.1), transparent);
+  padding-top: 0.1rem;
 }
 
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-}
-
-/* Leaf/plant-tag shape */
-.skill-tag {
-  position: relative;
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 1rem 0.45rem 1.3rem;
-  font-size: 0.82rem;
-  font-weight: 500;
+}
+
+.skill-tag {
+  font-size: 0.88rem;
+  font-weight: 400;
   color: var(--text);
-  text-decoration: none;
-  border-radius: 0 50px 50px 0;
-
-  transition:
-    transform 0.3s var(--ease-spring),
-    box-shadow 0.3s,
-    filter 0.3s;
-  background: white;
-  box-shadow: 0 2px 10px rgba(74,55,40,0.07);
 }
 
-/* The tag-hole circle on the left */
-.skill-tag::before {
-  content: '';
-  position: absolute;
-  left: -1px;
-  width: 11px; height: 11px;
-  border-radius: 0 50% 50% 0;
-  background: var(--cream);
-  border-right: 1px solid rgba(74,55,40,0.12);
-  border-top: 1px solid rgba(74,55,40,0.12);
-  border-bottom: 1px solid rgba(74,55,40,0.12);
-  z-index: 1;
+.skill-tag + .skill-tag::before {
+  content: '·';
+  margin: 0 0.55rem;
+  color: var(--text-muted);
+  font-weight: 300;
 }
-
-.skill-tag:hover {
-  transform: scale(1.1) rotate(-1deg);
-  box-shadow: 0 6px 20px rgba(74,55,40,0.14);
-  filter: brightness(1.03);
-}
-
-/* Color variants */
-.skill-tag.peach   { background: linear-gradient(135deg, #fff5ee, #ffe8d6); border: 1px solid rgba(240,168,130,0.3); }
-.skill-tag.sage    { background: linear-gradient(135deg, #f0f7ee, #ddf0d8); border: 1px solid rgba(138,184,154,0.3); }
-.skill-tag.rose    { background: linear-gradient(135deg, #fdf0f2, #f8dde0); border: 1px solid rgba(201,144,154,0.3); }
-.skill-tag.sand    { background: linear-gradient(135deg, #fdf8f0, #f5e8d3); border: 1px solid rgba(200,170,130,0.3); }
-.skill-tag.lavender{ background: linear-gradient(135deg, #f5f0fd, #e8ddfc); border: 1px solid rgba(160,130,200,0.3); }
-
-.skill-tag.peach:hover    { box-shadow: 0 6px 20px rgba(240,168,130,0.3); }
-.skill-tag.sage:hover     { box-shadow: 0 6px 20px rgba(138,184,154,0.3); }
-.skill-tag.rose:hover     { box-shadow: 0 6px 20px rgba(201,144,154,0.3); }
-.skill-tag.sand:hover     { box-shadow: 0 6px 20px rgba(200,170,130,0.3); }
-.skill-tag.lavender:hover { box-shadow: 0 6px 20px rgba(160,130,200,0.3); }
 
 /* ── PROJECTS ──────────────────────────────────────── */
 #projects {
