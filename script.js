@@ -6,12 +6,12 @@ if (canvas) {
   const ctx = canvas.getContext('2d');
 
   const COLORS = [
-    [255, 203, 164],  // peach
-    [232, 180, 184],  // rose
-    [184, 212, 176],  // sage
-    [245, 230, 211],  // sand
-    [255, 220, 200],  // warm peach
-    [248, 210, 185],  // soft apricot
+    [162, 200, 240],  // sky
+    [186, 200, 245],  // periwinkle
+    [166, 214, 226],  // pale aqua
+    [201, 224, 244],  // mist
+    [176, 210, 246],  // soft blue
+    [191, 216, 249],  // pale azure
   ];
 
   class Blob {
@@ -118,14 +118,14 @@ if (waterCanvas) {
 
   // 8 colors mapped to 8 movement directions (clockwise from right)
   const WATER_PALETTE = [
-    [255, 168, 130],  // warm peach     → right
-    [240, 185, 140],  // amber          → down-right
-    [220, 140, 148],  // dusty rose     → down
-    [198, 118, 132],  // deep rose      → down-left
-    [160, 145, 205],  // soft lavender  → left
-    [118, 178, 140],  // sage green     → up-left
-    [108, 168, 158],  // teal-sage      → up
-    [195, 186, 140],  // warm sand      → up-right
+    [120, 172, 226],  // sky blue       → right
+    [142, 190, 236],  // light azure    → down-right
+    [152, 168, 226],  // periwinkle     → down
+    [120, 140, 212],  // indigo blue    → down-left
+    [170, 176, 232],  // soft lavender  → left
+    [110, 190, 192],  // aqua           → up-left
+    [92, 172, 184],   // deep aqua      → up
+    [172, 200, 226],  // blue grey      → up-right
   ];
 
   class Ink {
@@ -267,32 +267,114 @@ document.querySelectorAll('.skill-tag').forEach((tag, i) => {
 
 /* ════════════════════════════════════════════════════════
    SMOOTH SCROLL for all anchor links
+   Delegated, so links re-rendered by the language switch
+   (footer credit, etc.) keep working.
 ════════════════════════════════════════════════════════ */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+document.addEventListener('click', (e) => {
+  const anchor = e.target.closest('a[href^="#"]');
+  if (!anchor) return;
+
+  const hash = anchor.getAttribute('href');
+  if (!hash || hash === '#') return;
+
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 
 /* ════════════════════════════════════════════════════════
-   LIVE CLOCK in footer (tiny delight)
+   PROJECT INDEX — the list shows first, a row opens its panel
+   Rows carry data-project="<id>"; panels carry the same id,
+   so adding a project only means adding markup.
+
+   The panel's height is animated in px and then handed back to
+   `auto`, so it keeps reflowing if the text changes (i18n switch).
 ════════════════════════════════════════════════════════ */
-const footer = document.querySelector('footer p');
-if (footer) {
-  const baseText = footer.innerHTML;
-  setInterval(() => {
-    const now = new Date();
-    const time = now.toLocaleTimeString('en-US', {
-      hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai'
+const projectRows = Array.from(document.querySelectorAll('.project-row'));
+const projectPanels = Array.from(document.querySelectorAll('.project-detail'));
+const projectLayout = document.querySelector('.projects-layout');
+
+if (projectRows.length) {
+  const isActive = (row) => row.classList.contains('is-active');
+
+  projectPanels.forEach(panel => {
+    panel.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'height') return;
+      if (panel.classList.contains('is-open')) panel.style.height = 'auto';
     });
-    // Only update if element still matches
-    if (footer.innerHTML.includes('·')) {
-      footer.innerHTML = baseText.replace('2025', '2025 · ' + time + ' CST');
-    }
-  }, 1000);
+  });
+
+  const openPanel = (panel) => {
+    panel.classList.add('is-open');
+    panel.style.height = panel.scrollHeight + 'px';
+    // safety net: if transitionend never arrives, still release the
+    // fixed height so later reflows (e.g. a language switch) fit
+    clearTimeout(panel._autoTimer);
+    panel._autoTimer = setTimeout(() => {
+      if (panel.classList.contains('is-open')) panel.style.height = 'auto';
+    }, 900);
+  };
+
+  const closePanel = (panel) => {
+    clearTimeout(panel._autoTimer);
+    // pin the current height, flush layout, then go to 0 — otherwise
+    // `height: auto` has no number to animate from
+    panel.style.height = panel.scrollHeight + 'px';
+    void panel.offsetHeight;
+    panel.classList.remove('is-open');
+    panel.style.height = '0px';
+  };
+
+  const showProject = (id) => {
+    projectPanels.forEach(panel => {
+      const on = id !== null && panel.dataset.project === id;
+      if (on && !panel.classList.contains('is-open')) openPanel(panel);
+      else if (!on && panel.classList.contains('is-open')) closePanel(panel);
+    });
+    projectRows.forEach(row => {
+      const on = id !== null && row.dataset.project === id;
+      row.classList.toggle('is-active', on);
+      row.setAttribute('aria-expanded', String(on));
+    });
+    // closed → the index takes the full width and centres itself
+    if (projectLayout) projectLayout.classList.toggle('has-open', id !== null);
+  };
+
+  projectRows.forEach((row, i) => {
+    // same row again → fold it back up
+    row.addEventListener('click', () => {
+      showProject(isActive(row) ? null : row.dataset.project);
+    });
+
+    // Up / Down arrows walk the list and open as they go
+    row.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      e.preventDefault();
+      const step = e.key === 'ArrowDown' ? 1 : -1;
+      const next = projectRows[(i + step + projectRows.length) % projectRows.length];
+      next.focus();
+      showProject(next.dataset.project);
+    });
+  });
 }
+
+
+/* ════════════════════════════════════════════════════════
+   LIVE CLOCK in footer (tiny delight)
+   Writes into #footer-clock only — the footer text itself is
+   owned by i18n.js and may be re-rendered on language change.
+════════════════════════════════════════════════════════ */
+setInterval(() => {
+  const clock = document.getElementById('footer-clock');
+  if (!clock) return;
+
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-US', {
+    hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai'
+  });
+  const next = `${now.getFullYear()} · ${time} CST`;
+  if (clock.textContent !== next) clock.textContent = next;
+}, 1000);
