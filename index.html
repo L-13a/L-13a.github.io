@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lisa's space</title>
+  <meta name="description" content="Lisa Liu — computer science student at Harbin Institute of Technology, Shenzhen, and product manager intern building AI agent platforms." data-i18n-attr="content:meta.desc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -20,14 +22,21 @@
   <!-- Navigation -->
   <nav id="nav">
     <a class="nav-logo" href="#hero">Lisa Liu</a>
-    <ul class="nav-links">
-      <li style="--i:1"><a href="#about">About</a></li>
-      <li style="--i:2"><a href="#skills">Skills</a></li>
-      <li style="--i:3"><a href="#projects">Projects</a></li>
-      <li style="--i:4"><a href="#photography-entry">Photography</a></li>
-      <li style="--i:5"><a href="#currently">Currently</a></li>
-      <li style="--i:6"><a href="#contact">Contact</a></li>
-    </ul>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li style="--i:1"><a href="#about" data-i18n="nav.about">About</a></li>
+        <li style="--i:2"><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li style="--i:3"><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li style="--i:4"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- Language switch: EN ⇄ 中文 -->
+      <button class="lang-toggle" id="lang-toggle" type="button"
+              aria-label="Switch to Chinese" title="Switch to Chinese" aria-pressed="false">
+        <span class="lang-toggle-label">中</span>
+      </button>
+    </div>
   </nav>
 
   <!-- ╔═══════════════ HERO ═══════════════╗ -->
@@ -35,54 +44,40 @@
     <canvas id="hero-canvas"></canvas>
 
     <div class="hero-content" id="hero-parallax">
-      <p class="hero-tagline">
+      <p class="hero-tagline" data-i18n-html="hero.tagline">
         Building in global,<br/>Thinking in long term.
       </p>
-      <div class="hero-cta-group">
-        <a href="#projects" class="btn btn-primary">See my work ↓</a>
-        <a href="#contact" class="btn btn-ghost">Say hello</a>
-      </div>
     </div>
 
     <div class="scroll-hint">
-      <span>scroll</span>
       <div class="scroll-hint-line"></div>
     </div>
   </section>
 
   <!-- ╔═══════════════ ABOUT ══════════════╗ -->
   <section id="about">
-    <div class="section-label reveal">About me</div>
+    <div class="section-label reveal" data-i18n="about.label">About me</div>
     <div class="about-grid">
 
       <div class="about-portrait reveal">
         <div class="portrait-frame">
-          <div class="portrait-inner">
-            <span class="portrait-emoji">🌿</span>
-            <p class="portrait-quote">"curiosity is the best compass"</p>
-          </div>
+          <img class="portrait-photo" src="life-photo.webp" alt="Lisa Liu" width="924" height="1280"
+               data-i18n-attr="alt:about.photoAlt" />
         </div>
         <div class="portrait-decoration"></div>
       </div>
 
       <div class="about-text-content">
-        <h2 class="about-heading reveal">
+        <h2 class="about-heading reveal" data-i18n-html="about.heading">
           CS student,<br/>product thinker
         </h2>
         <div class="divider reveal"></div>
-        <p class="about-bio reveal">
+        <p class="about-bio reveal" data-i18n-html="about.bio1">
           Hi! I'm Lisa — a computer science undergrad at <strong>Harbin Institute of Technology, Shenzhen</strong> (class of 2027), currently interning as a <strong>Product Manager</strong> at an AI startup where I'm shaping the future of AI agent platforms.
         </p>
-        <p class="about-bio reveal">
+        <p class="about-bio reveal" data-i18n-html="about.bio2">
           My brain lives at the intersection of logic and creativity: I love math competition problems, building full-stack apps from scratch, and the quiet satisfaction of writing a good spec. On the side, I'm slowly making my way through JLPT prep and exploring how Japan approaches digital products.
         </p>
-        <div class="about-chips reveal-group">
-          <span class="about-chip">🎓 HIT Shenzhen</span>
-          <span class="about-chip">🤖 AI Agent PM</span>
-          <span class="about-chip">🇯🇵 Japan market</span>
-          <span class="about-chip">✍️ note.com writer</span>
-          <span class="about-chip">📐 Math olympiad</span>
-        </div>
       </div>
 
     </div>
@@ -90,205 +85,116 @@
 
   <!-- ╔═══════════════ SKILLS ═════════════╗ -->
   <section id="skills">
-    <div class="section-label reveal">Craft &amp; Toolkit</div>
-    <h2 class="skills-heading reveal">Things I work with</h2>
-    <p class="skills-subheading reveal">A little garden of skills, still growing.</p>
+    <div class="section-label reveal" data-i18n="skills.label">My Skills</div>
+    <h2 class="skills-heading reveal" data-i18n="skills.heading">Things I work with</h2>
 
-    <div class="skills-cluster reveal">
-      <div class="cluster-title">Frontend</div>
-      <div class="skill-tags reveal-group">
-        <span class="skill-tag peach">⚛️ React</span>
-        <span class="skill-tag peach">📜 TypeScript</span>
-        <span class="skill-tag peach">🎨 CSS / Tailwind</span>
-        <span class="skill-tag peach">⚡ Next.js</span>
-      </div>
-    </div>
-
-    <div class="skills-cluster reveal">
-      <div class="cluster-title">Backend</div>
-      <div class="skill-tags reveal-group">
-        <span class="skill-tag sage">🐍 Python</span>
-        <span class="skill-tag sage">🟨 JavaScript</span>
-        <span class="skill-tag sage">🗄️ PostgreSQL</span>
-        <span class="skill-tag sage">🔥 FastAPI</span>
-        <span class="skill-tag sage">🐋 Docker</span>
-      </div>
-    </div>
-
-    <div class="skills-cluster reveal">
-      <div class="cluster-title">Product</div>
-      <div class="skill-tags reveal-group">
-        <span class="skill-tag rose">📋 Growth</span>
-        <span class="skill-tag rose">📊 User Research</span>
-        <span class="skill-tag rose">🗺️ Roadmapping</span>
-      </div>
-    </div>
-
-    <div class="skills-cluster reveal">
-      <div class="cluster-title">AI</div>
-      <div class="skill-tags reveal-group">
-        <span class="skill-tag rose">🦜 Agent</span>
-        <span class="skill-tag rose">🤖 LLM</span>
-      </div>
-    </div>
-
-    <div class="skills-cluster reveal">
-      <div class="cluster-title">Interests &amp; Extras</div>
-      <div class="skill-tags reveal-group">
-        <span class="skill-tag sand">✍️ Content Writing</span>
-        <span class="skill-tag sand">📸 Photography</span>
-      </div>
-    </div>
   </section>
 
   <!-- ╔═══════════════ PROJECTS ═══════════╗ -->
   <section id="projects">
     <div class="projects-header">
-      <div class="section-label reveal">Selected work</div>
-      <h2 class="projects-heading reveal">Things I've built</h2>
-      <p class="projects-sub reveal">Hover a card to peek inside.</p>
+      <div class="section-label reveal" data-i18n="projects.label">Projects</div>
+      <h2 class="projects-heading reveal" data-i18n="projects.heading">Selected Projects</h2>
+      <p class="projects-sub reveal" data-i18n="projects.sub">A collection of things I&#39;ve built.</p>
     </div>
 
-    <div class="projects-grid reveal-group">
+    <div class="projects-layout reveal-group">
 
-      <!-- Project 1 -->
-      <div class="project-card">
-        <div class="project-cover cover-peach">🤖</div>
-        <div class="project-body">
-          <div class="project-tags-row">
-            <span class="project-pill">AI</span>
-            <span class="project-pill">Full-stack</span>
-            <span class="project-pill">Python</span>
+      <!-- ── Index ─────────────────────────────────── -->
+      <ol class="project-list">
+        <li>
+          <button class="project-row" type="button" data-project="rag"
+                  aria-controls="project-rag" aria-expanded="false">
+            <span class="project-index">01</span>
+            <span class="project-row-copy">
+              <span class="project-row-title" data-i18n="rag.title">End-to-End RAG System on the Wix Knowledge Base</span>
+              <span class="project-row-sub" data-i18n="rag.lead">An end-to-end retrieval-augmented generation system for Wix customer support.</span>
+            </span>
+            <span class="project-row-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </li>
+
+        <li>
+          <button class="project-row" type="button" data-project="landy"
+                  aria-controls="project-landy" aria-expanded="false">
+            <span class="project-index">02</span>
+            <span class="project-row-copy">
+              <span class="project-row-title" data-i18n="landy.title">Landy — Job-Hunting Assistant Agent</span>
+              <span class="project-row-sub" data-i18n="landy.lead">An AI job-hunting assistant agent for campus recruiting.</span>
+            </span>
+            <span class="project-row-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </li>
+      </ol>
+
+      <!-- ── Detail ────────────────────────────────── -->
+      <article class="project-detail" id="project-rag" data-project="rag">
+        <div class="project-detail-inner">
+        <div class="project-detail-index">01</div>
+        <h3 class="project-detail-title" data-i18n="rag.title">End-to-End RAG System on the Wix Knowledge Base</h3>
+        <p class="project-detail-lead" data-i18n="rag.lead">An end-to-end retrieval-augmented generation system for Wix customer support.</p>
+
+        <dl class="project-facts">
+          <div class="project-fact">
+            <dt data-i18n="rag.bgLabel">Background</dt>
+            <dd data-i18n="rag.bg">Built on 6,221 official Wix help articles and 400 real support tickets. The scenario splits into two hard question types — single-document exact match and multi-document multi-hop reasoning — so I designed an evaluation suite and drove every optimisation with offline experiments.</dd>
           </div>
-          <div class="project-title">AgentFlow Studio</div>
-          <p class="project-short">A no-code visual builder for composing multi-agent AI workflows.</p>
-        </div>
-        <div class="project-reveal">
-          <div class="reveal-title">AgentFlow Studio</div>
-          <p class="reveal-desc">
-            A drag-and-drop canvas where non-technical users can wire together LLM agents, tools, and data sources. Built the frontend in React with a custom node graph engine, and a FastAPI backend with async agent execution. Reduced workflow setup time by 60% in user testing.
-          </p>
-          <div class="reveal-links">
-            <a href="#" class="reveal-link">GitHub →</a>
-            <a href="#" class="reveal-link">Demo →</a>
+          <div class="project-fact">
+            <dt data-i18n="rag.evalLabel">Evaluation design</dt>
+            <dd data-i18n="rag.eval">Analysing real tickets surfaced those two scenarios, so I re-cut the metrics per question type — Hit@5 and MRR for single-document questions, Full@5 for multi-document ones — and made joint improvement across every question set the bar for adopting a change.</dd>
           </div>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card">
-        <div class="project-cover cover-sage">∑</div>
-        <div class="project-body">
-          <div class="project-tags-row">
-            <span class="project-pill">Math</span>
-            <span class="project-pill">WebGL</span>
-            <span class="project-pill">TypeScript</span>
+          <div class="project-fact">
+            <dt data-i18n="rag.modelLabel">Model selection</dt>
+            <dd data-i18n="rag.model">Benchmarked MiniLM, bge-small, E5-large and others. With comparable quality, MiniLM brought retrieval latency down to 1/4 and index build time to roughly 1/20 of the original plan — a large gain in responsiveness.</dd>
           </div>
-          <div class="project-title">MathSketch</div>
-          <p class="project-short">Interactive visualizations for higher-level math concepts.</p>
-        </div>
-        <div class="project-reveal">
-          <div class="reveal-title">MathSketch</div>
-          <p class="reveal-desc">
-            A web playground for exploring topology, linear algebra, and combinatorics through live interactive sketches. Each visualization is hand-coded in WebGL/Canvas with real-time parameter controls. Born from a love of math olympiads and a frustration with static textbook diagrams.
-          </p>
-          <div class="reveal-links">
-            <a href="#" class="reveal-link">GitHub →</a>
-            <a href="#" class="reveal-link">Explore →</a>
+          <div class="project-fact">
+            <dt data-i18n="rag.retrievalLabel">Retrieval optimisation</dt>
+            <dd data-i18n="rag.retrieval">For weak single-document accuracy I ran controlled experiments on chunking, retrieval strategy and reranking, and traced the biggest gain to contextual embedding. The final recipe — stop-word removal, document metadata on every chunk, and an 8:2 blend of semantic and keyword retrieval — lifted Top-5 recall on single-document QA pairs from 62% to 77%. For low full recall on multi-document questions, a small model rewrites the query and an agentic loop lets it retrieve autonomously, taking Full@5 from 35% to 75%.</dd>
           </div>
-        </div>
-      </div>
+        </dl>
 
-      <!-- Project 3 -->
-      <div class="project-card">
-        <div class="project-cover cover-rose">旅</div>
-        <div class="project-body">
-          <div class="project-tags-row">
-            <span class="project-pill">Japan</span>
-            <span class="project-pill">Next.js</span>
-            <span class="project-pill">Writing</span>
+        <div class="project-detail-divider"></div>
+        <div class="project-tags" data-i18n="rag.tags">RAG · Retrieval · Evaluation · Embedding</div>
+
+        <div class="project-links">
+          <a class="project-link" href="https://proper-sawfish-7302.edgespark.app" target="_blank" rel="noopener">
+            <span data-i18n="rag.view">View Project ↗</span>
+          </a>
+        </div>
+        </div>
+      </article>
+
+
+      <!-- ── Landy ─────────────────────────────────── -->
+      <article class="project-detail" id="project-landy" data-project="landy">
+        <div class="project-detail-inner">
+        <div class="project-detail-index">02</div>
+        <h3 class="project-detail-title" data-i18n="landy.title">Landy — Job-Hunting Assistant Agent</h3>
+        <p class="project-detail-lead" data-i18n="landy.lead">An AI job-hunting assistant agent for campus recruiting.</p>
+
+        <dl class="project-facts">
+          <div class="project-fact">
+            <dt data-i18n="landy.bgLabel">Background</dt>
+            <dd data-i18n="landy.bg">Company due diligence, résumé rewriting and interview prep are the most repetitive — and slowest — parts of campus recruiting. Landy is a job-hunting assistant agent built to take that weight off the candidate.</dd>
           </div>
-          <div class="project-title">Tabi Log</div>
-          <p class="project-short">A bilingual travel + learning journal for Japan explorers.</p>
-        </div>
-        <div class="project-reveal">
-          <div class="reveal-title">Tabi Log</div>
-          <p class="reveal-desc">
-            Part language-learning tool, part travel diary. Supports bilingual entries (Chinese/Japanese), JLPT vocabulary tagging, and maps your journeys. I built this to document my own Japan market research trips and share the stories on note.com. Uses Next.js + Supabase.
-          </p>
-          <div class="reveal-links">
-            <a href="#" class="reveal-link">GitHub →</a>
-            <a href="#" class="reveal-link">Read on note →</a>
+          <div class="project-fact">
+            <dt data-i18n="landy.archLabel">Agent architecture</dt>
+            <dd data-i18n="landy.arch">A workflow split into four sub-agents — JD parsing, business research, résumé rewriting and mock interview. Research and rewriting run in parallel to cut end-to-end latency. The rewriting agent uses RAG over a ChromaDB vector index of the user&#39;s experience, pulling the passages that match JD keywords in real time; a HITL reflection loop then writes back into Memory, so user preferences persist and the agent grows more personalised over time.</dd>
           </div>
+          <div class="project-fact">
+            <dt data-i18n="landy.evalLabel">Prompting &amp; evaluation</dt>
+            <dd data-i18n="landy.eval">Built an evaluation system scored on JD match and user satisfaction, assembled a high-quality dataset, and layered LLM-as-judge on top of human annotation to drive prompt optimisation. After iteration, the JD match rate of AI-rewritten résumés rose by about 35%.</dd>
+          </div>
+        </dl>
+
+        <div class="project-detail-divider"></div>
+        <div class="project-tags" data-i18n="landy.tags">Agent · RAG · Workflow · Evaluation</div>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ╔═══════════════ PHOTOGRAPHY ENTRY ═══════════╗ -->
-  <section id="photography-entry">
-    <div class="section-label reveal">Photography</div>
-    <a class="photography-door reveal" href="photograghy/" aria-label="Open photography gallery">
-      <div class="photo-door-preview" aria-hidden="true">
-        <span class="photo-strip strip-one"></span>
-        <span class="photo-strip strip-two"></span>
-        <span class="photo-strip strip-three"></span>
-      </div>
-      <div class="photo-door-copy">
-        <p class="photo-door-kicker">A quieter side project</p>
-        <h2>Scenes I keep</h2>
-        <p>
-          Street corners, windows, travel light, and the small still moments
-          that usually happen between plans.
-        </p>
-        <span class="photo-door-link">Enter gallery →</span>
-      </div>
-    </a>
-  </section>
-
-  <!-- ╔═══════════════ CURRENTLY ══════════╗ -->
-  <section id="currently">
-    <div class="section-label reveal">Right now</div>
-    <h2 class="currently-heading reveal">Currently</h2>
-    <p class="currently-sub reveal">A living snapshot — updated whenever life shifts.</p>
-
-    <div class="currently-grid reveal-group">
-
-      <div class="currently-card">
-        <span class="currently-icon">🔨</span>
-        <div class="currently-verb">Building</div>
-        <div class="currently-item">AI Agent Platform</div>
-        <div class="currently-detail">Shipping v2 of the agent orchestration layer at my startup.</div>
-      </div>
-
-      <div class="currently-card">
-        <span class="currently-icon">📚</span>
-        <div class="currently-verb">Learning</div>
-        <div class="currently-item">Japanese N2</div>
-        <div class="currently-detail">Grinding kanji flashcards. 700/2000 done. がんばります.</div>
-      </div>
-
-      <div class="currently-card">
-        <span class="currently-icon">📖</span>
-        <div class="currently-verb">Reading</div>
-        <div class="currently-item">The Art of Doing Science</div>
-        <div class="currently-detail">Hamming's essays on research and how to think about big problems.</div>
-      </div>
-
-      <div class="currently-card">
-        <span class="currently-icon">✍️</span>
-        <div class="currently-verb">Writing</div>
-        <div class="currently-item">note.com series</div>
-        <div class="currently-detail">A deep-dive on Japan's AI product ecosystem for Chinese readers.</div>
-      </div>
-
-      <div class="currently-card">
-        <span class="currently-icon">🎵</span>
-        <div class="currently-verb">Listening</div>
-        <div class="currently-item">Yorushika</div>
-        <div class="currently-detail">Japanese indie-folk perfect for late-night coding sessions.</div>
-      </div>
+      </article>
 
     </div>
   </section>
@@ -296,39 +202,27 @@
   <!-- ╔═══════════════ CONTACT ════════════╗ -->
   <section id="contact">
     <div class="contact-bg-blob"></div>
-    <p class="contact-eyebrow reveal">Let's connect</p>
-    <h2 class="contact-heading reveal">
-      Come find me<br/>in the <em>garden</em>
+    <h2 class="contact-heading reveal" data-i18n-html="contact.heading">
+      Let's <em>connect</em>
     </h2>
-    <p class="contact-sub reveal">
-      Always happy to chat about AI products, math puzzles, Japan, or whatever you're building. Drop me a message.
+    <p class="contact-sub reveal" data-i18n="contact.sub">
+      Always happy to chat about AI products, or whatever you're building. Drop me a message.
     </p>
 
     <div class="social-links reveal-group">
       <a href="mailto:lisa@example.com" class="social-link">
         <span class="social-icon">✉️</span>
-        Email
-      </a>
-      <a href="https://github.com/" target="_blank" rel="noopener" class="social-link">
-        <span class="social-icon">🐙</span>
-        GitHub
-      </a>
-      <a href="https://x.com/" target="_blank" rel="noopener" class="social-link">
-        <span class="social-icon">✖</span>
-        X / Twitter
-      </a>
-      <a href="https://note.com/" target="_blank" rel="noopener" class="social-link">
-        <span class="social-icon">📝</span>
-        note.com
+        <span data-i18n="contact.email">Email</span>
       </a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>Crafted with ♡ and a lot of tea by <a href="#hero">Lisa Liu</a> · 2025</p>
+    <p data-i18n-html="footer.text">Crafted with ♡ and a lot of tea by <a href="#hero">Lisa Liu</a> </p>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
